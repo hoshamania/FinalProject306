@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Alert, Text, TextInput, TouchableHighlight, View, Image, style, StyleSheet, Button, Modal } from 'react-native';
+import { Alert, Text, TextInput, TouchableHighlight, View, Image, style, StyleSheet, Button, Modal, FlatList } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -125,12 +125,73 @@ function Overview() {
 }
 
 function Transactions() {
-  return (
-    <View style={styles.container}>
-      <Text>Transactions!</Text>
-       
-    </View>
-  );
+    let theData = [
+        { key: "a", name:"3.00", input: "-", category: "Coffee"},
+        { key: "b", name: "550.00" ,input: "+", category: "Payday"},
+        { key: "c", name: "950.00", input: "-", category: "Rent"},
+        { key: "d", name: "50.00", input: "-", category: "Savings"},
+        { key: "e", name: "550.00", input: "+", category: "Payday"},
+        { key: "f", name: "35.00", input: "+", category: "Gift"},
+    ];
+
+    const [data, setData] = useState(theData);
+    const [state, setState] = useState("null");
+    const [state2, setState2] = useState("null");
+    const [state3, setState3] = useState("null");
+    const [state4, setState4] = useState("null");
+
+    const _onPressButton = (key) => {
+        Alert.alert('Transaction ' + key);
+    }
+    _renderItem = data => {
+        return (
+            <TouchableHighlight
+                onPress={() => _onPressButton(data.item.name)}
+                underlayColor="yellow">
+                <Text style={styles.row}>{data.item.category}{' \n'}{data.item.key}{': '}{data.item.input}{' '}{data.item.name}</Text>
+            </TouchableHighlight>
+        );
+    };
+
+    const updateState = () => {
+        Alert.alert("New transaction: " + state + " Amount: " +state2);
+        var newDs = [];
+        newDs = data.slice();
+        newDs.push({ key:state, name:state2, input:state3, category:state4})
+        setData(newDs);
+    };
+
+    return (
+        <View style={styles.container}>
+            <FlatList data={data} style={{flex: 3}}
+                      renderItem={_renderItem} />
+            <TextInput style={{flex:1}}
+                       style={{height: 40}}
+                       placeholder='Enter key'
+                       onChangeText={(myState) => setState(myState)}
+            />
+            <TextInput style={{flex:1}}
+                       style={{height: 40}}
+                       placeholder='+/-'
+                       onChangeText={(myState3) => setState(myState3)}
+            />
+            <TextInput style={{flex:1}}
+                       style={{height: 40}}
+                       placeholder='Enter category'
+                       onChangeText={(myState4) => setState(myState4)}
+            />
+            <TextInput style={{flex:1}}
+                       style={{height: 40}}
+                       placeholder='Enter an amount'
+                       onChangeText={(myState2) => setState2(myState2)}
+            />
+            <Button style={{marginBottom: 100}}
+                    onPress={updateState }
+                    title='Add'
+            />
+
+        </View>
+    );
 }
 
 function Insights() {
@@ -243,6 +304,12 @@ const styles = StyleSheet.create({
         width:100,
         borderColor:'gray',
         borderWidth:1
+    },
+    row: {
+        fontSize: 24,
+        padding: 42,
+        borderWidth: 1,
+        borderColor: "#DDDDDD",
+        backgroundColor: '#BB3333',
     }
-
 });

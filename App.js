@@ -37,9 +37,11 @@ function Overview() {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
               
-            <Text style={styles.modalText}>Remove amount:</Text>
+            <Text style={styles.modalText}>Withdrawal:</Text>
             
             <TextInput style={styles.txtIn} placeholder='Enter amount' onChangeText = {text => updateText(text)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
+            <Text style={styles.modalText}>Details:</Text>
+                <TextInput style={styles.txtIn } placeholder='' onChangeText =   {text => updateText(text)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "blue" }}
               onPress={() => {
@@ -62,7 +64,7 @@ function Overview() {
           setModalVisible(true);
         }}
       >
-        <Text style={styles.textStyle}>Remove Amount</Text>
+        <Text style={styles.textStyle}>Withdrawal</Text>
       </TouchableHighlight>
         
             
@@ -79,9 +81,11 @@ function Overview() {
                 <View style={styles.centeredView}>
                 <View style={styles.modalView}>
               
-                <Text style={styles.modalText}>Add amount:</Text>
+                <Text style={styles.modalText}>Deposit:</Text>
             
                 <TextInput style={styles.txtIn} placeholder='Enter amount' onChangeText =   {text => updateText(text)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
+                <Text style={styles.modalText}>Details:</Text>
+                <TextInput style={styles.txtIn} placeholder='' onChangeText =   {text => updateText(text)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
                 <TouchableHighlight
                     style={{ ...styles.openButton, backgroundColor: "blue" }}
                     onPress={() => {
@@ -104,7 +108,7 @@ function Overview() {
           setModalVisible2(true);
         }}
       >
-        <Text style={styles.textStyle}>Add Amount</Text>
+        <Text style={styles.textStyle}>Deposit</Text>
       </TouchableHighlight>
             
         </View>
@@ -126,38 +130,39 @@ function Overview() {
 
 function Transactions() {
     let theData = [
-        { key: "a", name:"3.00", input: "-", category: "Coffee"},
-        { key: "b", name: "550.00" ,input: "+", category: "Payday"},
-        { key: "c", name: "950.00", input: "-", category: "Rent"},
-        { key: "d", name: "50.00", input: "-", category: "Savings"},
-        { key: "e", name: "550.00", input: "+", category: "Payday"},
-        { key: "f", name: "35.00", input: "+", category: "Gift"},
+        { key: "a", amount:"3.00", type: "-", category: "Coffee"},
+        { key: "b", amount: "550.00" ,type: "+", category: "Payday"},
+        { key: "c", amount: "950.00", type: "-", category: "Rent"},
+        { key: "d", amount: "50.00", type: "-", category: "Savings"},
+        { key: "e", amount: "550.00", type: "+", category: "Payday"},
+        { key: "f", amount: "35.00", type: "+", category: "Gift"},
     ];
 
     const [data, setData] = useState(theData);
-    const [state, setState] = useState("null");
-    const [state2, setState2] = useState("null");
-    const [state3, setState3] = useState("null");
-    const [state4, setState4] = useState("null");
+    const [myid, setid] = useState(101);
+    const [myamount, setamount] = useState(null);
+    const [withDep, setWithDep] = useState("null");
+    const [myDescription, setDescription] = useState("null");
 
-    const _onPressButton = (key) => {
-        Alert.alert('Transaction ' + key);
+    const _onPressButton = (item) => {
+        Alert.alert('Transaction number: ' + item.key+"\nTransaction amount: "+item.type+item.amount);
     }
     _renderItem = data => {
         return (
             <TouchableHighlight
-                onPress={() => _onPressButton(data.item.name)}
+                onPress={() => _onPressButton(data.item)}
                 underlayColor="yellow">
-                <Text style={styles.row}>{data.item.category}{' \n'}{data.item.key}{': '}{data.item.input}{' '}{data.item.name}</Text>
+                <Text style={styles.row}>{data.item.category}{' \n'}{data.item.key}{': '}{data.item.type}{' '}{data.item.amount}</Text>
             </TouchableHighlight>
         );
     };
 
     const updateState = () => {
-        Alert.alert("New transaction: " + state + " Amount: " +state2);
+        Alert.alert("New transaction: " + myid + " Amount: " +myamount);
         var newDs = [];
         newDs = data.slice();
-        newDs.push({ key:state, name:state2, input:state3, category:state4})
+        newDs.push({ key:myid, amount:myamount, type:withDep, category:myDescription})
+        setid(myid+1);
         setData(newDs);
     };
 
@@ -165,25 +170,20 @@ function Transactions() {
         <View style={styles.container}>
             <FlatList data={data} style={{flex: 3}}
                       renderItem={_renderItem} />
-            <TextInput style={{flex:1}}
-                       style={{height: 40}}
-                       placeholder='Enter key'
-                       onChangeText={(myState) => setState(myState)}
-            />
-            <TextInput style={{flex:1}}
+            <TextInput style={{flex:1}} //redundant when on other screen
                        style={{height: 40}}
                        placeholder='+/-'
-                       onChangeText={(myState3) => setState(myState3)}
+                       onChangeText={(withDep) => setWithDep(withDep)}
             />
             <TextInput style={{flex:1}}
                        style={{height: 40}}
-                       placeholder='Enter category'
-                       onChangeText={(myState4) => setState(myState4)}
+                       placeholder='Enter description'
+                       onChangeText={(myDescription) => setDescription(myDescription)}
             />
             <TextInput style={{flex:1}}
                        style={{height: 40}}
                        placeholder='Enter an amount'
-                       onChangeText={(myState2) => setState2(myState2)}
+                       onChangeText={(myamount) => setamount(myamount)}
             />
             <Button style={{marginBottom: 100}}
                     onPress={updateState }

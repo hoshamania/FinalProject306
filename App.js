@@ -16,6 +16,7 @@ function Overview() {
     const [modalVisible, setModalVisible] = useState(false);
     const [modalVisible2, setModalVisible2] = useState(false);
     const [inputText, setInputText] = useState(0);
+    const [transactionDetains, setDetails] = useState("");
     
     const updateText = (text) => {
         setInputText(text);
@@ -41,7 +42,7 @@ function Overview() {
             
             <TextInput style={styles.txtIn} placeholder='Enter amount' onChangeText = {text => updateText(text)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
             <Text style={styles.modalText}>Details:</Text>
-                <TextInput style={styles.txtIn } placeholder='' onChangeText =   {text => updateText(text)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
+                <TextInput style={styles.txtIn } placeholder='' onChangeText =   {text2 => setDetails(text2)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "blue" }}
               onPress={() => {
@@ -85,7 +86,7 @@ function Overview() {
             
                 <TextInput style={styles.txtIn} placeholder='Enter amount' onChangeText =   {text => updateText(text)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
                 <Text style={styles.modalText}>Details:</Text>
-                <TextInput style={styles.txtIn} placeholder='' onChangeText =   {text => updateText(text)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
+                <TextInput style={styles.txtIn} placeholder='' onChangeText =   {text2 => setDetails(text2)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
                 <TouchableHighlight
                     style={{ ...styles.openButton, backgroundColor: "blue" }}
                     onPress={() => {

@@ -29,20 +29,28 @@ export function Overview() {
     //hokey way of making the progressCircle change color
     //lime "rgb(10,255,10)"
     //red  "rgb(255,10,10)"
-    const updatePColor= ()=>{
+    const updatePColor= (amount, wD)=>{
+        let remaining = amtS;
+        let halfMax = maxBudg/2;
+        if(wD=="subtract"){
+            remaining=amtS-amount;
+        }else{
+            remaining=amtS+parseFloat(amount);
+        }
         let r=10;
         let g= 10;
-        if(amtS>(maxBudg/2)){
+        if(remaining>(halfMax)){
+            //for the first half of the budget the red vaule increases giving a yellow hue
             g=255
-            r= (245*(1-((amtS-(maxBudg/2))/maxBudg/2)))+10;
-            Alert.alert("red increase");
+            r= (245*(1-((remaining-halfMax)/halfMax)))+10;
         }else{
+            //for the second half of the budget the green decreases to go to red
             r=255
-            g= (245*(amtS/(maxBudg/2)))+10;
-            Alert.alert("green decrease");
+            g= (245*(remaining/(halfMax)))-20;
+            //Alert.alert("green decrease");
         }
         setColor('"rgb('+r+','+g+',10)"')
-        
+        Alert.alert(g+"");
     }
 
     return (
@@ -73,7 +81,7 @@ export function Overview() {
                                         setAmtS(amtS-parseFloat(inputText));
                                     }
                                     catch{}
-                                    updatePColor();
+                                    updatePColor(inputText,"subtract");
                                 }}
                             >
                        
@@ -119,7 +127,7 @@ export function Overview() {
                                         setAmtS(amtS+parseFloat(inputText));
                                     }
                                     catch{}
-                                    updatePColor();
+                                    updatePColor(inputText,"pointless");
                                 }}
                             >
                                 <Text style={styles.textStyle}>Submit</Text>

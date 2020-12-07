@@ -19,11 +19,31 @@ export function Overview() {
     const [modalVisible2, setModalVisible2] = useState(false);
     const [inputText, setInputText] = useState(0);
     const [transactionDetains, setDetails] = useState("");
+    const [progressColor, setColor]=useState("rgb(10,255,10)");
+
 
     const updateText = (text) => {
         setInputText(text);
     }
 
+    //hokey way of making the progressCircle change color
+    //lime "rgb(10,255,10)"
+    //red  "rgb(255,10,10)"
+    const updatePColor= ()=>{
+        let r=10;
+        let g= 10;
+        if(amtS>(maxBudg/2)){
+            g=255
+            r= (245*(1-((amtS-(maxBudg/2))/maxBudg/2)))+10;
+            Alert.alert("red increase");
+        }else{
+            r=255
+            g= (245*(amtS/(maxBudg/2)))+10;
+            Alert.alert("green decrease");
+        }
+        setColor('"rgb('+r+','+g+',10)"')
+        
+    }
 
     return (
 
@@ -50,11 +70,13 @@ export function Overview() {
                                 onPress={() => {
                                     setModalVisible(!modalVisible);
                                     try{
-                                        setAmtS(amtS-parseFloat(inputText))
+                                        setAmtS(amtS-parseFloat(inputText));
                                     }
                                     catch{}
+                                    updatePColor();
                                 }}
                             >
+                       
                                 <Text style={styles.textStyle}>Submit</Text>
                             </TouchableHighlight>
                         </View>
@@ -94,9 +116,10 @@ export function Overview() {
                                 onPress={() => {
                                     setModalVisible2(!modalVisible2);
                                     try{
-                                        setAmtS(amtS+parseFloat(inputText))
+                                        setAmtS(amtS+parseFloat(inputText));
                                     }
                                     catch{}
+                                    updatePColor();
                                 }}
                             >
                                 <Text style={styles.textStyle}>Submit</Text>
@@ -119,13 +142,13 @@ export function Overview() {
                 percent={100*(amtS/maxBudg)}
                 radius={100}
                 borderWidth={30}
-                color="lime"
+                color= {progressColor}
                 shadowColor="#999"
                 bgColor="#fff"
             >
                 <Text style={{ fontSize: 18 }}>{"$"+amtS+"/"+maxBudg}</Text>
             </ProgressCircle>
-            <Text>Overview!</Text>
+            <Text>{progressColor}</Text>
 
         </View>
     );

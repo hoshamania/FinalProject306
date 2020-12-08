@@ -14,7 +14,7 @@ const INITIAL_STATE = {
 const transactionReducer = (state = INITIAL_STATE, action) => {
 	switch(action.type){
 		case 'ADD_TRANSACTION':
-			//adds new transaction to array
+			//adds new transaction object to array
 			const{
 				transactions,
 			} = state;

@@ -58,7 +58,7 @@ function Transactions() {
                 onValueChange={(itemValue, itemIndex) => setWithDep({ type: itemValue })}>
             <Picker.Item label="Deposit" value="+" />
             <Picker.Item label="Withdrawal" value="-" />
-            <Picker.Item label="Note" value="0" />
+            <Picker.Item label="Note" value=" " />
             </Picker>
 
 
@@ -134,10 +134,11 @@ const styles = StyleSheet.create({
     },
     row: {
         fontSize: 24,
-        padding: 42,
+        padding: 20,
+        width:380,
         borderWidth: 1,
-        borderColor: "#DDDDDD",
-        backgroundColor: '#BB3333',
+        borderColor: "#FFFFFF",
+        backgroundColor: '#E3F2FF',
     }
 });
 

@@ -10,7 +10,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-export function Transactions() {
+function Transactions() {
     let theData = [
         { key: "a", amount:"3.00", type: "-", category: "Coffee"},
         { key: "b", amount: "550.00" ,type: "+", category: "Payday"},
@@ -140,3 +140,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#BB3333',
     }
 });
+
+const mapStateToProps = (state) => {
+    const { transactions } = state
+    return { transactions }
+};
+
+export default connect(mapStateToProps)(Transactions);

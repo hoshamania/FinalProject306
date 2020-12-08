@@ -13,8 +13,8 @@ import transactionReducer from './TransactionReducer';
 //screens
 import {Alerts} from './AlertScreen';
 import {Insights} from './InsightsScreen';
-import {Transactions} from './TransactionsScreen';
-import {Overview} from './HomeScreen';
+import Transactions from './TransactionsScreen';
+import Overview from './HomeScreen';
 
 // You can import Ionicons from @expo/vector-icons/Ionicons if you use Expo or
 // react-native-vector-icons/Ionicons otherwise.

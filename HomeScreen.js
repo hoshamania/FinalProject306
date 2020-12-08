@@ -4,6 +4,7 @@ import { Alert, Text, TextInput, TouchableHighlight, View, Image, style, StyleSh
 //Redux
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
 import Ionicons from 'react-native-vector-icons/Ionicons';
 //Navigation
 import { NavigationContainer } from '@react-navigation/native';
@@ -12,7 +13,7 @@ import ProgressCircle from "react-native-progress-circle";
 
 
 
-export function Overview() {
+function Overview(props) {
     const [maxBudg, setMaxBudg] = useState(5000);
     const [amtS, setAmtS] = useState(4000);
     const [modalVisible, setModalVisible] = useState(false);
@@ -220,3 +221,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#BB3333',
     }
 });
+
+const mapStateToProps = (state) => {
+    const { transactions } = state
+    return { transactions }
+};
+
+export default connect(mapStateToProps)(Overview);

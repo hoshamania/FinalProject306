@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Alert, Text, TextInput, TouchableHighlight, View, Image, style, StyleSheet, Button, Modal, FlatList } from 'react-native';
+import {Picker} from '@react-native-picker/picker'
 
 //Redux
 import { bindActionCreators } from 'redux';
@@ -22,7 +23,7 @@ export function Transactions() {
     const [data, setData] = useState(theData);
     const [myid, setid] = useState(101);
     const [myamount, setamount] = useState(null);
-    const [withDep, setWithDep] = useState("null");
+    const [withDep, setWithDep] = useState({ type: "Deposit" });
     const [myDescription, setDescription] = useState("null");
 
     const _onPressButton = (item) => {
@@ -42,7 +43,7 @@ export function Transactions() {
         Alert.alert("New transaction: " + myid + " Amount: " +myamount);
         var newDs = [];
         newDs = data.slice();
-        newDs.push({ key:myid, amount:myamount, type:withDep, category:myDescription})
+        newDs.push({ key:myid, amount:myamount, type:withDep.type, category:myDescription})
         setid(myid+1);
         setData(newDs);
     };
@@ -51,11 +52,16 @@ export function Transactions() {
         <View style={styles.container}>
             <FlatList data={data} style={{flex: 3}}
                       renderItem={_renderItem} />
-            <TextInput style={{flex:1}} //redundant when on other screen
-                       style={{height: 40}}
-                       placeholder='+/-'
-                       onChangeText={(withDep) => setWithDep(withDep)}
-            />
+            <Picker
+                selectedValue={withDep.type}
+                style={styles.row, {height: 50, width:200}}
+                onValueChange={(itemValue, itemIndex) => setWithDep({ type: itemValue })}>
+            <Picker.Item label="Deposit" value="+" />
+            <Picker.Item label="Withdrawal" value="-" />
+            <Picker.Item label="Note" value="0" />
+            </Picker>
+
+
             <TextInput style={{flex:1}}
                        style={{height: 40}}
                        placeholder='Enter description'

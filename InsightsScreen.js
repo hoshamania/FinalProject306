@@ -1,5 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, FlatList, TouchableHighlight, Alert, TextInput, Modal} from 'react-native';
+
+
+
 //Redux
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';

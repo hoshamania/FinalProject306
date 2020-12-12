@@ -15,7 +15,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 export function Alerts() {
     return (
         <View style={styles.container}>
-            <Text>Alerts!</Text>
+            <Text>Reminders!</Text>
 
         </View>
     );

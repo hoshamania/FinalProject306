@@ -12,12 +12,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 function Transactions() {
     let theData = [
-        { key: "a", amount:"3.00", type: "-", category: "Coffee"},
-        { key: "b", amount: "550.00" ,type: "+", category: "Payday"},
-        { key: "c", amount: "950.00", type: "-", category: "Rent"},
-        { key: "d", amount: "50.00", type: "-", category: "Savings"},
-        { key: "e", amount: "550.00", type: "+", category: "Payday"},
-        { key: "f", amount: "35.00", type: "+", category: "Gift"},
+        { key: "90", amount:"3.00", type: "-", category: "Coffee"},
+        { key: "91", amount: "550.00" ,type: "+", category: "Payday"},
+        { key: "92", amount: "950.00", type: "-", category: "Rent"},
+        { key: "93", amount: "50.00", type: "-", category: "Savings"},
+        { key: "94", amount: "550.00", type: "+", category: "Payday"},
+        { key: "95", amount: "35.00", type: "+", category: "Gift"},
     ];
 
     const [data, setData] = useState(theData);

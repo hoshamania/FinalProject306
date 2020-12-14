@@ -54,13 +54,17 @@ function Overview(props) {
             g= (245*(remaining/(halfMax)))-20;
             //Alert.alert("green decrease");
         }
-        setColor('"rgb('+r+','+g+',10)"')
+        //setColor('"rgb('+r+','+g+',10)"')
         Alert.alert(g+"");
     }
 
     return (
 
         <View style={styles.container}>
+            <Image source={{uri:'https://previews.123rf.com/images/tribalium123/tribalium1231306/tribalium123130600043/20192008-money-in-the-hand-hand-with-money-hand-holding-banknotes.jpg'}}
+                   style={{flex: .4,width: 100, height: 70}}/>
+            <Text style={styles.title}>tonddie.</Text>
+
             <View style={{flexDirection:"row",justifyContent: 'space-between'}}>
                 <Modal
                     animationType="slide"
@@ -177,6 +181,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    title: {
+        flex:0.2,
+        color: "black",
+    fontSize: 40,
+    margin: 40,
+    fontWeight: "bold",
+    textAlign: "center"
+    },
     centeredView: {
         flex: 1,
         justifyContent: "center",
@@ -209,6 +221,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         textAlign: "center"
     },
+
     modalText: {
         marginBottom: 10,
         textAlign: "left"

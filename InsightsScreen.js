@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, FlatList, TouchableHighlight, Alert, TextInput, Modal} from 'react-native';
+import { StyleSheet, Text, View, Alert, TextInput, Modal} from 'react-native';
 
 
 
@@ -15,68 +15,40 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 export function Insights() {
     return (
         <View style={styles.container}>
-            <Text>Insights!</Text>
-
+            <View style={styles.top}>
+            <Text>"^^Place holder for graphs!"</Text>
+            </View>
+            <View style={styles.middle} />
+            <View style={styles.bottom} />
         </View>
     );
 }
 
 
-const styles = StyleSheet.create({
-    container: {
+const styles = StyleSheet.create({container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: "space-between",
+        backgroundColor: "#fff",
+        padding: 20,
+        margin: 10,
     },
-    centeredView: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 22
+    top: {
+        flex: 0.3,
+        backgroundColor: "lightblue",
+        borderWidth: 3,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
     },
-    modalView: {
-        margin: 25,
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 65,
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5
+    middle: {
+        flex: 0.3,
+        backgroundColor: "beige",
+        borderWidth: 3,
     },
-    openButton: {
-        backgroundColor: "blue",
-        borderRadius: 20,
-        padding: 10,
-        elevation: 2
+    bottom: {
+        flex: 0.3,
+        backgroundColor: "pink",
+        borderWidth: 3,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
     },
-    textStyle: {
-        color: "white",
-        fontWeight: "bold",
-        textAlign: "center"
-    },
-    modalText: {
-        marginBottom: 10,
-        textAlign: "left"
-    },
-    txtIn: {
-        height:30,
-        margin:10,
-        width:100,
-        borderColor:'gray',
-        borderWidth:1
-    },
-    row: {
-        fontSize: 24,
-        padding: 42,
-        borderWidth: 1,
-        borderColor: "#DDDDDD",
-        backgroundColor: '#BB3333',
-    }
 });

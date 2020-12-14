@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Text, TextInput, TouchableHighlight, View, Image, style, StyleSheet, Button, Modal, FlatList } from 'react-native';
+import { Alert, Text, TextInput, TouchableHighlight, View, Image, style, StyleSheet, Button, Modal } from 'react-native';
 
 //Redux
 import { bindActionCreators } from 'redux';
@@ -10,6 +10,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ProgressCircle from "react-native-progress-circle";
+import { addTransaction } from './TransactionActions';
 
 
 
@@ -31,9 +32,12 @@ function Overview(props) {
     //lime "rgb(10,255,10)"
     //red  "rgb(255,10,10)"
     const updatePColor= (amount, wD)=>{
+        var vitalInfo=[amount, wD, transactionDetains];
+        props.addTransaction(vitalInfo);
+
         let remaining = amtS;
         let halfMax = maxBudg/2;
-        if(wD=="subtract"){
+        if(wD=="-"){
             remaining=amtS-amount;
         }else{
             remaining=amtS+parseFloat(amount);
@@ -71,7 +75,7 @@ function Overview(props) {
 
                             <Text style={styles.modalText}>Withdrawal:</Text>
 
-                            <TextInput style={styles.txtIn} placeholder='Enter amount' onChangeText = {text => updateText(text)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
+                            <TextInput style={styles.txtIn} keyboardType="number-pad" placeholder='Enter amount' onChangeText = {text => updateText(text)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
                             <Text style={styles.modalText}>Details:</Text>
                             <TextInput style={styles.txtIn } placeholder='' onChangeText =   {text2 => setDetails(text2)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
                             <TouchableHighlight
@@ -80,9 +84,11 @@ function Overview(props) {
                                     setModalVisible(!modalVisible);
                                     try{
                                         setAmtS(amtS-parseFloat(inputText));
+                                        
                                     }
                                     catch{}
-                                    updatePColor(inputText,"subtract");
+                                   
+                                    updatePColor(inputText,"-");
                                 }}
                             >
                        
@@ -117,7 +123,7 @@ function Overview(props) {
 
                             <Text style={styles.modalText}>Deposit:</Text>
 
-                            <TextInput style={styles.txtIn} placeholder='Enter amount' onChangeText =   {text => updateText(text)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
+                            <TextInput style={styles.txtIn} keyboardType="number-pad" placeholder='Enter amount' onChangeText =   {text => updateText(text)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
                             <Text style={styles.modalText}>Details:</Text>
                             <TextInput style={styles.txtIn} placeholder='' onChangeText =   {text2 => setDetails(text2)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
                             <TouchableHighlight
@@ -126,9 +132,10 @@ function Overview(props) {
                                     setModalVisible2(!modalVisible2);
                                     try{
                                         setAmtS(amtS+parseFloat(inputText));
+                                        setMaxBudg(maxBudg+parseFloat(inputText));
                                     }
                                     catch{}
-                                    updatePColor(inputText,"pointless");
+                                    updatePColor(inputText,"+");
                                 }}
                             >
                                 <Text style={styles.textStyle}>Submit</Text>
@@ -213,18 +220,17 @@ const styles = StyleSheet.create({
         borderColor:'gray',
         borderWidth:1
     },
-    row: {
-        fontSize: 24,
-        padding: 42,
-        borderWidth: 1,
-        borderColor: "#DDDDDD",
-        backgroundColor: '#BB3333',
-    }
+    
 });
 
 const mapStateToProps = (state) => {
-    const { transactions } = state
-    return { transactions }
+    const { tns } = state
+    return { tns }
 };
+const mapDispatchToProps = dispatch => (
+    bindActionCreators({
+      addTransaction,
+    }, dispatch)
+  );
 
-export default connect(mapStateToProps)(Overview);
+export default connect(mapStateToProps, mapDispatchToProps)(Overview);

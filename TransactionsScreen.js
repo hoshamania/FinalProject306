@@ -6,11 +6,12 @@ import {Picker} from '@react-native-picker/picker'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { addTransaction } from './TransactionActions';
 //Navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-function Transactions() {
+function Transactions(props) {
     let theData = [
         { key: "90", amount:"3.00", type: "-", category: "Coffee"},
         { key: "91", amount: "550.00" ,type: "+", category: "Payday"},
@@ -21,7 +22,7 @@ function Transactions() {
     ];
 
     const [data, setData] = useState(theData);
-    const [myid, setid] = useState(101);
+    const [myid, setid] = useState(95);
     const [myamount, setamount] = useState(null);
     const [withDep, setWithDep] = useState({ type: "Deposit" });
     const [myDescription, setDescription] = useState("null");
@@ -50,32 +51,11 @@ function Transactions() {
 
     return (
         <View style={styles.container}>
-            <FlatList data={data} style={{flex: 3}}
+            <FlatList data={props.tns.transactions} style={{flex: 3}}
                       renderItem={_renderItem} />
-            <Picker
-                selectedValue={withDep.type}
-                style={styles.row, {height: 50, width:200}}
-                onValueChange={(itemValue, itemIndex) => setWithDep({ type: itemValue })}>
-            <Picker.Item label="Deposit" value="+" />
-            <Picker.Item label="Withdrawal" value="-" />
-            <Picker.Item label="Note" value=" " />
-            </Picker>
 
 
-            <TextInput style={{flex:1}}
-                       style={{height: 40}}
-                       placeholder='Enter description'
-                       onChangeText={(myDescription) => setDescription(myDescription)}
-            />
-            <TextInput style={{flex:1}}
-                       style={{height: 40}}
-                       placeholder='Enter an amount'
-                       onChangeText={(myamount) => setamount(myamount)}
-            />
-            <Button style={{marginBottom: 100}}
-                    onPress={updateState }
-                    title='Add'
-            />
+
 
         </View>
     );
@@ -89,49 +69,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    centeredView: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 22
-    },
-    modalView: {
-        margin: 25,
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 65,
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5
-    },
-    openButton: {
-        backgroundColor: "blue",
-        borderRadius: 20,
-        padding: 10,
-        elevation: 2
-    },
-    textStyle: {
-        color: "white",
-        fontWeight: "bold",
-        textAlign: "center"
-    },
-    modalText: {
-        marginBottom: 10,
-        textAlign: "left"
-    },
-    txtIn: {
-        height:30,
-        margin:10,
-        width:100,
-        borderColor:'gray',
-        borderWidth:1
-    },
     row: {
         fontSize: 24,
         padding: 20,
@@ -143,8 +80,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-    const { transactions } = state
-    return { transactions }
+    const { tns } = state
+    return { tns }
 };
 
 export default connect(mapStateToProps)(Transactions);

@@ -43,7 +43,7 @@ export default function App() {
                                 iconName = focused ? 'ios-cash' : 'ios-cash';
                             } else if (route.name === 'Insights') {
                                 iconName = focused ? 'ios-pie' : 'ios-pie';
-                            } else if (route.name === 'Alerts') {
+                            } else if (route.name === 'Reminders') {
                                 iconName = focused ? 'ios-mail-open' : 'ios-mail';
                             }
 
@@ -59,7 +59,7 @@ export default function App() {
                     <Tab.Screen name="Home" component={Overview} />
                     <Tab.Screen name="Transactions" component={Transactions} />
                     <Tab.Screen name="Insights" component={Insights} />
-                    <Tab.Screen name="Alerts" component={Alerts} />
+                    <Tab.Screen name="Reminders" component={Alerts} />
                 </Tab.Navigator>
             </NavigationContainer>
         </Provider>

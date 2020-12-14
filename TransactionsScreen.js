@@ -51,6 +51,7 @@ function Transactions(props) {
 
     return (
         <View style={styles.container}>
+            <Text style={styles.title}>Recent Transactions</Text>
             <FlatList data={props.tns.transactions} style={{flex: 3}}
                       renderItem={_renderItem} />
 
@@ -76,7 +77,15 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#FFFFFF",
         backgroundColor: '#E3F2FF',
-    }
+    },
+    title: {
+        flex:0.04,
+        color: "black",
+        fontSize: 20,
+        margin: 50,
+        fontWeight: "bold",
+        textAlign: "center"
+    },
 });
 
 const mapStateToProps = (state) => {

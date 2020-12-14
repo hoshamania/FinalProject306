@@ -57,7 +57,9 @@ function Overview(props) {
     return (
 
         <View style={styles.container}>
-            <Text style={styles.title}>tonddie</Text>
+            <Image source={{uri:'https://previews.123rf.com/images/tribalium123/tribalium1231306/tribalium123130600043/20192008-money-in-the-hand-hand-with-money-hand-holding-banknotes.jpg'}}
+                   style={{flex: .4,width: 100, height: 70}}/>
+            <Text style={styles.title}>tonddie.</Text>
 
             <View style={{flexDirection:"row",justifyContent: 'space-between'}}>
                 <Modal

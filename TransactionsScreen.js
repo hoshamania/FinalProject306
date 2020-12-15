@@ -30,6 +30,7 @@ function Transactions(props) {
     const _onPressButton = (item) => {
         Alert.alert('Transaction number: ' + item.key+"\nTransaction amount: "+item.type+item.amount);
     }
+
     _renderItem = data => {
         return (
             <TouchableHighlight

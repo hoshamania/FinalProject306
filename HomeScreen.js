@@ -25,7 +25,13 @@ function Overview(props) {
 
 
     const updateText = (text) => {
-        setInputText(text);
+        
+        if(isNaN(text)){
+            Alert.alert("Please input only numbers")
+        }else{
+            setInputText(text);
+        }
+        
     }
 
     //hokey way of making the progressCircle change color
@@ -54,9 +60,10 @@ function Overview(props) {
             g= (245*(remaining/(halfMax)))-20;
             //Alert.alert("green decrease");
         }
-        //setColor('"rgb('+r+','+g+',10)"')
-        Alert.alert(g+"");
+        setColor('"rgb('+r+','+g+',10)"');
+       
     }
+
 
     return (
 
@@ -79,7 +86,7 @@ function Overview(props) {
 
                             <Text style={styles.modalText}>Withdrawal:</Text>
 
-                            <TextInput style={styles.txtIn} keyboardType="number-pad" placeholder='Enter amount' onChangeText = {text => updateText(text)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
+                            <TextInput style={styles.txtIn} keyboardType="decimal-pad" placeholder='Enter amount' onChangeText = {text => updateText(text)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
                             <Text style={styles.modalText}>Details:</Text>
                             <TextInput style={styles.txtIn } placeholder='' onChangeText =   {text2 => setDetails(text2)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
                             <TouchableHighlight
@@ -87,7 +94,14 @@ function Overview(props) {
                                 onPress={() => {
                                     setModalVisible(!modalVisible);
                                     try{
-                                        setAmtS(amtS-parseFloat(inputText));
+                                            if(parseFloat(inputText)<0){
+                                                Alert.alert("No negatives!");
+                                            }else if(isNaN(parseFloat(inputText))){
+                                                Alert.alert("Numbers only");
+                                            }else{
+                                                setAmtS(amtS-parseFloat(inputText));
+                                            }                           
+                                        
                                         
                                     }
                                     catch{}
@@ -113,7 +127,7 @@ function Overview(props) {
 
 
 
-                <Text>                                      </Text>
+                <Text>  </Text>
                 <Modal
                     animationType="slide"
                     transparent={true}
@@ -127,7 +141,7 @@ function Overview(props) {
 
                             <Text style={styles.modalText}>Deposit:</Text>
 
-                            <TextInput style={styles.txtIn} keyboardType="number-pad" placeholder='Enter amount' onChangeText =   {text => updateText(text)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
+                            <TextInput style={styles.txtIn} keyboardType="decimal-pad" placeholder='Enter amount' onChangeText =   {text => updateText(text)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
                             <Text style={styles.modalText}>Details:</Text>
                             <TextInput style={styles.txtIn} placeholder='' onChangeText =   {text2 => setDetails(text2)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
                             <TouchableHighlight
@@ -135,8 +149,15 @@ function Overview(props) {
                                 onPress={() => {
                                     setModalVisible2(!modalVisible2);
                                     try{
-                                        setAmtS(amtS+parseFloat(inputText));
-                                        setMaxBudg(maxBudg+parseFloat(inputText));
+                                        if(parseFloat(inputText)<0){
+                                            Alert.alert("No negatives!");
+
+                                        }else if(isNaN(parseFloat(inputText))){
+                                            Alert.alert("Numbers only");
+                                        }else{
+                                            setAmtS(amtS+parseFloat(inputText));
+                                            setMaxBudg(maxBudg+parseFloat(inputText));
+                                        }
                                     }
                                     catch{}
                                     updatePColor(inputText,"+");
@@ -168,7 +189,7 @@ function Overview(props) {
             >
                 <Text style={{ fontSize: 18 }}>{"$"+amtS+"/"+maxBudg}</Text>
             </ProgressCircle>
-            <Text>{progressColor}</Text>
+
 
         </View>
     );

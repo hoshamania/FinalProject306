@@ -21,11 +21,7 @@ function Transactions(props) {
         { key: "95", amount: "35.00", type: "+", category: "Gift"},
     ];
 
-    const [data, setData] = useState(theData);
-    const [myid, setid] = useState(95);
-    const [myamount, setamount] = useState(null);
-    const [withDep, setWithDep] = useState({ type: "Deposit" });
-    const [myDescription, setDescription] = useState("null");
+
 
     const _onPressButton = (item) => {
         Alert.alert('Transaction number: ' + item.key+"\nTransaction amount: "+item.type+item.amount);
@@ -41,14 +37,7 @@ function Transactions(props) {
         );
     };
 
-    const updateState = () => {
-        Alert.alert("New transaction: " + myid + " Amount: " +myamount);
-        var newDs = [];
-        newDs = data.slice();
-        newDs.push({ key:myid, amount:myamount, type:withDep.type, category:myDescription})
-        setid(myid+1);
-        setData(newDs);
-    };
+
 
     return (
         <View style={styles.container}>

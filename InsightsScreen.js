@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 //Navigation
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
@@ -18,6 +18,13 @@ function Insights(props) {
 
     const [theData, setTheData] = useState([]);
     const [theDepData, setTheDepData] = useState([]);
+
+    useFocusEffect(
+        React.useCallback(()=>{
+            updateGraph();
+            
+        },[]),
+    )
 
     useEffect(() => {
         const withdraw = [];
@@ -53,14 +60,7 @@ function Insights(props) {
 
     return (
         <View style={styles.container}>
-            <TouchableHighlight
-                style={styles.openButton}
-                onPress={() => {
-                    updateGraph();
-                }}
-            >
-                <Text style={styles.textStyle}>        Reload        </Text>
-            </TouchableHighlight>
+            
             <View style={styles.top}>
                 <Text style={styles.captionStyle}>Your Withdrawals</Text>
                 <V.VictoryPie

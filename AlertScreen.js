@@ -9,7 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
-export function Alerts() {
+export function AlertS() {
     let theData = [
     ];
 

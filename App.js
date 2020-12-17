@@ -11,7 +11,7 @@ import { createStore } from 'redux';
 import transactionReducer from './TransactionReducer';
 
 //screens
-import {Alerts} from './AlertScreen';
+import {AlertS} from './AlertScreen';
 import Insights from './InsightsScreen';
 import Transactions from './TransactionsScreen';
 import Overview from './HomeScreen';
@@ -59,7 +59,7 @@ export default function App() {
                     <Tab.Screen name="Home" component={Overview} />
                     <Tab.Screen name="Transactions" component={Transactions} />
                     <Tab.Screen name="Insights" component={Insights} />
-                    <Tab.Screen name="Reminders" component={Alerts} />
+                    <Tab.Screen name="Reminders" component={AlertS} />
                 </Tab.Navigator>
             </NavigationContainer>
         </Provider>

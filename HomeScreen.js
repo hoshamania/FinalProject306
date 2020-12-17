@@ -84,7 +84,7 @@ function Overview(props) {
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
 
-                            <Text style={styles.modalText}>Withdrawal:</Text>
+                            <Text style={styles.modalText}>Withdraw:</Text>
 
                             <TextInput style={styles.txtIn} keyboardType="decimal-pad" placeholder='Enter amount' onChangeText = {text => updateText(text)} autoCapitalize = 'none' clearTextOnFocus> </TextInput>
                             <Text style={styles.modalText}>Details:</Text>
@@ -98,15 +98,18 @@ function Overview(props) {
                                                 Alert.alert("No negatives!");
                                             }else if(isNaN(parseFloat(inputText))){
                                                 Alert.alert("Numbers only");
+                                            }else if(amtS-parseFloat(inputText)<0){
+                                                Alert.alert("Not enough money!");
                                             }else{
                                                 setAmtS(amtS-parseFloat(inputText));
+                                                updatePColor(inputText,"-");
                                             }                           
                                         
                                         
                                     }
                                     catch{}
                                    
-                                    updatePColor(inputText,"-");
+                                    
                                 }}
                             >
                        
@@ -122,7 +125,7 @@ function Overview(props) {
                         setModalVisible(true);
                     }}
                 >
-                    <Text style={styles.textStyle}>Withdrawal</Text>
+                    <Text style={styles.textStyle}>Withdraw</Text>
                 </TouchableHighlight>
 
 
@@ -157,10 +160,11 @@ function Overview(props) {
                                         }else{
                                             setAmtS(amtS+parseFloat(inputText));
                                             setMaxBudg(maxBudg+parseFloat(inputText));
+                                            updatePColor(inputText,"+");
                                         }
                                     }
                                     catch{}
-                                    updatePColor(inputText,"+");
+                                    
                                 }}
                             >
                                 <Text style={styles.textStyle}>Submit</Text>
